@@ -1,0 +1,158 @@
+:root {
+	--bg: #f3f6fb;
+	--card: #ffffff;
+	--muted: #6b7280;
+	--accent: #2563eb;
+	--accent-2: #10b981;
+	--danger: #ef4444;
+	--shadow: 0 6px 20px rgba(16,24,40,0.08);
+}
+
+/* Application shell: border + padding applied around the whole app */
+.app-shell {
+	box-sizing: border-box;
+	margin: 16px;
+	padding: 12px;
+	border: 1px solid rgba(15,23,42,0.06);
+	border-radius: 12px;
+	background-clip: padding-box;
+}
+
+/* Container centers the card vertically & horizontally */
+.join-create-chat-container {
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%);
+	padding: 32px;
+	box-sizing: border-box;
+}
+
+/* Card */
+.join-card {
+	width: 100%;
+	max-width: 420px;
+	background: var(--card);
+	border-radius: 12px;
+	padding: 28px;
+	box-shadow: var(--shadow);
+	border: 1px solid rgba(16,24,40,0.04);
+	box-sizing: border-box;
+}
+
+/* Title */
+.join-title {
+	margin: 0 0 18px 0;
+	font-size: 20px;
+	font-weight: 600;
+	color: #0f172a;
+	text-align: center;
+	letter-spacing: -0.2px;
+}
+
+/* Icon above title */
+.join-icon {
+	width: 64px;
+	height: 64px;
+	margin: 0 auto 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 50%;
+	background: linear-gradient(135deg, rgba(37,99,235,0.95), rgba(16,185,129,0.95));
+	box-shadow: 0 8px 20px rgba(16,24,40,0.08);
+	color: #fff; /* svg uses currentColor */
+}
+
+.join-icon svg { display: block; }
+
+/* Form layout */
+.join-form {
+	display: flex;
+	flex-direction: column;
+	gap: 18px;
+}
+
+/* Form group */
+.form-group {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+/* Label */
+.form-group label {
+	font-size: 13px;
+	color: var(--muted);
+}
+
+/* Input fields */
+.form-group input {
+	height: 44px;
+	padding: 10px 12px;
+	border-radius: 8px;
+	border: 1px solid rgba(15,23,42,0.06);
+	background: #ffffff;
+	font-size: 14px;
+	color: #0b1220;
+	outline: none;
+	transition: box-shadow .12s ease, border-color .12s ease;
+	box-sizing: border-box;
+}
+
+.form-group input::placeholder {
+	color: rgba(11,18,32,0.35);
+}
+
+.form-group input:focus {
+	border-color: rgba(37,99,235,0.9);
+	box-shadow: 0 4px 12px rgba(37,99,235,0.08);
+}
+
+/* Buttons row */
+.button-row {
+	display: flex;
+	gap: 10px;
+	margin-top: 6px;
+}
+
+/* Shared button styles */
+.btn {
+	flex: 1;
+	height: 44px;
+	border: none;
+	border-radius: 8px;
+	font-weight: 600;
+	letter-spacing: 0.4px;
+	cursor: pointer;
+	transition: transform .08s ease, box-shadow .08s ease, opacity .08s ease;
+}
+
+/* Join button (primary) */
+.btn-join {
+	background: linear-gradient(90deg, var(--accent), #1e40af);
+	color: white;
+	box-shadow: 0 8px 22px rgba(37,99,235,0.12);
+}
+
+.btn-join:hover { transform: translateY(-1px); }
+
+/* Create button (secondary) */
+.btn-create {
+	background: linear-gradient(90deg, var(--accent-2), #059669);
+	color: white;
+	box-shadow: 0 8px 22px rgba(16,185,129,0.12);
+}
+
+.btn-create:hover { transform: translateY(-1px); }
+
+/* Small screens */
+@media (max-width: 420px) {
+	.join-card {
+		padding: 20px;
+	}
+	.button-row {
+		flex-direction: column;
+	}
+}
