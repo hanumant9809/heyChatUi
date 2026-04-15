@@ -35,23 +35,16 @@ export default function ChatPage() {
 
 			// Subscribe to room topic
 			const subscribed = ChatService.subscribe(roomId, (message) => {
-				console.log('ChatPage: Received message:', message);
+				console.log('ChatPage: Received message from server:', message);
 				
-				// Don't add duplicate messages that we just sent
-				setMessages(prev => {
-					const isDuplicate = prev.some(m => 
-						m.id === message.timestamp && m.sender === message.sender
-					);
-					if (isDuplicate) return prev;
-
-					return [...prev, {
-						id: message.timestamp || Date.now(),
-						from: message.sender === userName ? 'me' : 'other',
-						text: message.content,
-						time: new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-						sender: message.sender
-					}];
-				});
+				// Add message from server broadcast (all messages come from server now)
+				setMessages(prev => [...prev, {
+					id: message.timestamp || Date.now(),
+					from: message.sender === userName ? 'me' : 'other',
+					text: message.content,
+					time: new Date(message.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+					sender: message.sender
+				}]);
 			});
 
 			if (subscribed) {
@@ -114,17 +107,12 @@ export default function ChatPage() {
 			return;
 		}
 
-		// Add to local messages immediately
-		const newMsg = {
-			id: Date.now(),
-			from: 'me',
-			text: text.trim(),
-			time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-			sender: userName
-		};
-		setMessages(prev => [...prev, newMsg]);
+		// Clear input field immediately for better UX
 		setText('');
 		setError(null);
+		
+		// Message will be added to state when it comes back from server broadcast
+		console.log('ChatPage: Message sent, waiting for server broadcast...');
 	};
 
 	const handleAttach = (e) => {
